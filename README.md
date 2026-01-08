@@ -109,6 +109,16 @@ mlog.destroy();
 Mlog.destroy();  // Static method for singleton
 ```
 
+## Disable via Query Param
+
+Add `?mlog=false` to the URL to completely disable mlog:
+
+```
+https://myapp.com/page?mlog=false
+```
+
+When disabled, `Mlog.init()` returns a no-op instance so your code won't break.
+
 ## Gestures & Shortcuts
 
 - **Double-tap** anywhere on the page to toggle the panel
