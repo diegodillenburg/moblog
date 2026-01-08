@@ -1,5 +1,5 @@
 {
-  "name": "mlog",
+  "name": "moblog",
   "version": "1.0.0",
   "description": "Lightweight mobile browser debug console",
   "main": "dist/mlog.umd.js",
@@ -34,7 +34,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/diegodillenburg/mlog"
+    "url": "https://github.com/diegodillenburg/moblog"
+  },
+  "homepage": "https://github.com/diegodillenburg/moblog#readme",
+  "bugs": {
+    "url": "https://github.com/diegodillenburg/moblog/issues"
   },
   "devDependencies": {
     "esbuild": "^0.20.0",

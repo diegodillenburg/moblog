@@ -1,4 +1,4 @@
-# mlog
+# moblog
 
 Lightweight mobile browser debug console. ~8KB gzipped.
 
@@ -20,19 +20,19 @@ Lightweight mobile browser debug console. ~8KB gzipped.
 ## Installation
 
 ```bash
-npm install mlog
+npm install moblog
 ```
 
 Or via CDN:
 
 ```html
-<script src="https://unpkg.com/mlog"></script>
+<script src="https://unpkg.com/moblog"></script>
 ```
 
 ## Quick Start
 
 ```js
-import Mlog from 'mlog';
+import Mlog from 'moblog';
 
 // Initialize with defaults
 Mlog.init();
@@ -44,7 +44,7 @@ console.log('Hello mlog!');
 Or with a script tag:
 
 ```html
-<script src="https://unpkg.com/mlog"></script>
+<script src="https://unpkg.com/moblog"></script>
 <script>
   Mlog.init();
 </script>
@@ -53,7 +53,7 @@ Or with a script tag:
 ## Configuration
 
 ```js
-import Mlog from 'mlog';
+import Mlog from 'moblog';
 
 const mlog = new Mlog({
   // Display options
@@ -133,7 +133,7 @@ Initialize mlog **as early as possible** to capture all console output. The best
 
 ```js
 // app/javascript/application.js (top of file)
-import Mlog from 'mlog';
+import Mlog from 'moblog';
 Mlog.init();
 
 // ... rest of your imports
@@ -144,7 +144,7 @@ Mlog.init();
 ```js
 // app/javascript/controllers/application.js
 import { Application } from "@hotwired/stimulus";
-import Mlog from 'mlog';
+import Mlog from 'moblog';
 
 Mlog.init();
 
@@ -155,7 +155,7 @@ const application = Application.start();
 
 ```jsx
 // src/index.js or pages/_app.js (top of file)
-import Mlog from 'mlog';
+import Mlog from 'moblog';
 Mlog.init();
 
 // ... rest of imports
@@ -165,7 +165,7 @@ Mlog.init();
 
 ```js
 // src/main.js (top of file)
-import Mlog from 'mlog';
+import Mlog from 'moblog';
 Mlog.init();
 
 import { createApp } from 'vue';
@@ -176,7 +176,7 @@ import { createApp } from 'vue';
 
 ```html
 <!-- In <head>, before other scripts -->
-<script src="https://unpkg.com/mlog"></script>
+<script src="https://unpkg.com/moblog"></script>
 <script>Mlog.init();</script>
 ```
 
@@ -185,17 +185,17 @@ import { createApp } from 'vue';
 ```js
 // Only in development
 if (process.env.NODE_ENV === 'development') {
-  import('mlog').then(({ default: Mlog }) => Mlog.init());
+  import('moblog').then(({ default: Mlog }) => Mlog.init());
 }
 
 // Only in production (for field debugging)
 if (process.env.NODE_ENV === 'production') {
-  import('mlog').then(({ default: Mlog }) => Mlog.init());
+  import('moblog').then(({ default: Mlog }) => Mlog.init());
 }
 
 // Only on mobile devices
 if (/iPhone|iPad|Android/i.test(navigator.userAgent)) {
-  import('mlog').then(({ default: Mlog }) => Mlog.init());
+  import('moblog').then(({ default: Mlog }) => Mlog.init());
 }
 ```
 
@@ -222,7 +222,7 @@ npm test          # Run tests
 | vConsole | 50KB | Full devtools |
 | Eruda | 100KB+ | Full devtools |
 | debug | 3KB | Logging only, no UI |
-| **mlog** | ~8KB | Console + Errors + UI |
+| **moblog** | ~8KB | Console + Errors + UI |
 
 ## License
 
