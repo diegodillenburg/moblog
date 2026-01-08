@@ -1,0 +1,40 @@
+{
+  "name": "mlog",
+  "version": "1.0.0",
+  "description": "Lightweight mobile browser debug console",
+  "main": "dist/mlog.umd.js",
+  "module": "dist/mlog.esm.js",
+  "types": "dist/mlog.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/mlog.esm.js",
+      "require": "./dist/mlog.umd.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mobile",
+    "debug",
+    "console",
+    "logging",
+    "devtools",
+    "browser"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/diegodillenburg/mlog"
+  },
+  "devDependencies": {
+    "esbuild": "^0.20.0"
+  }
+}

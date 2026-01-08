@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mlog Demo</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    h1 {
+      color: #333;
+    }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0;
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      background: #333;
+      color: white;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #555;
+    }
+    button.error {
+      background: #d32f2f;
+    }
+    button.warn {
+      background: #f57c00;
+    }
+    button.info {
+      background: #1976d2;
+    }
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      padding: 12px;
+      border-radius: 6px;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+    .controls {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>mlog Demo</h1>
+
+  <div class="note">
+    <strong>Tip:</strong> Double-tap anywhere to toggle the console. Press Escape to minimize.
+  </div>
+
+  <h2>Test Console Logging</h2>
+  <div class="buttons">
+    <button onclick="console.log('Hello from console.log!')">console.log</button>
+    <button class="info" onclick="console.info('Info message here')">console.info</button>
+    <button class="warn" onclick="console.warn('Warning! Something might be wrong')">console.warn</button>
+    <button class="error" onclick="console.error('Error occurred!')">console.error</button>
+    <button onclick="console.debug('Debug details...')">console.debug</button>
+  </div>
+
+  <h2>Test Error Capture</h2>
+  <div class="buttons">
+    <button class="error" onclick="throwError()">Throw Error</button>
+    <button class="error" onclick="rejectPromise()">Reject Promise</button>
+    <button onclick="logObject()">Log Object</button>
+  </div>
+
+  <div class="controls">
+    <h2>mlog Controls</h2>
+    <div class="buttons">
+      <button onclick="window.mlog.show()">Show Panel</button>
+      <button onclick="window.mlog.hide()">Hide Panel</button>
+      <button onclick="window.mlog.toggle()">Toggle</button>
+      <button onclick="window.mlog.clear()">Clear Logs</button>
+      <button onclick="window.mlog.copy()">Copy Logs</button>
+      <button onclick="window.mlog.export('txt')">Export TXT</button>
+      <button onclick="window.mlog.export('json')">Export JSON</button>
+    </div>
+  </div>
+
+  <!-- UMD build works without a server (no CORS issues) -->
+  <script src="../dist/mlog.umd.js"></script>
+  <script>
+    // Initialize mlog
+    window.mlog = Mlog.init({
+      maxLines: 100,
+      startMinimized: true,
+      captureConsole: true,
+      captureErrors: true,
+      persist: true,
+    });
+
+    console.log('mlog initialized!');
+    console.info('Ready to capture logs');
+  </script>
+
+  <script>
+    function throwError() {
+      throw new Error('This is a test error!');
+    }
+
+    function rejectPromise() {
+      Promise.reject(new Error('Promise was rejected!'));
+    }
+
+    function logObject() {
+      console.log('User data:', {
+        name: 'John Doe',
+        email: 'john@example.com',
+        roles: ['admin', 'user'],
+        metadata: {
+          lastLogin: new Date().toISOString(),
+          visits: 42,
+        },
+      });
+    }
+  </script>
+</body>
+</html>
