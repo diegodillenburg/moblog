@@ -5,12 +5,38 @@ import { Persistence } from './storage/persistence.js';
 
 export class Mlog {
   static instance = null;
+  static disabled = false;
+
+  static isDisabledByQueryParam() {
+    if (typeof window === 'undefined') return false;
+    const params = new URLSearchParams(window.location.search);
+    return params.get('mlog') === 'false';
+  }
 
   static init(options = {}) {
+    if (Mlog.isDisabledByQueryParam()) {
+      Mlog.disabled = true;
+      return Mlog.createNoopInstance();
+    }
+
     if (!Mlog.instance) {
       Mlog.instance = new Mlog(options);
     }
     return Mlog.instance;
+  }
+
+  static createNoopInstance() {
+    return {
+      log: () => {},
+      show: () => {},
+      hide: () => {},
+      toggle: () => {},
+      clear: () => {},
+      filter: () => {},
+      copy: () => {},
+      export: () => {},
+      destroy: () => {},
+    };
   }
 
   static destroy() {

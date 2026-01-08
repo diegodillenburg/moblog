@@ -643,11 +643,43 @@ ${entry.stack}`;
 
   // src/Mlog.js
   var _Mlog = class _Mlog {
+    static isDisabledByQueryParam() {
+      if (typeof window === "undefined")
+        return false;
+      const params = new URLSearchParams(window.location.search);
+      return params.get("mlog") === "false";
+    }
     static init(options = {}) {
+      if (_Mlog.isDisabledByQueryParam()) {
+        _Mlog.disabled = true;
+        return _Mlog.createNoopInstance();
+      }
       if (!_Mlog.instance) {
         _Mlog.instance = new _Mlog(options);
       }
       return _Mlog.instance;
+    }
+    static createNoopInstance() {
+      return {
+        log: () => {
+        },
+        show: () => {
+        },
+        hide: () => {
+        },
+        toggle: () => {
+        },
+        clear: () => {
+        },
+        filter: () => {
+        },
+        copy: () => {
+        },
+        export: () => {
+        },
+        destroy: () => {
+        }
+      };
     }
     static destroy() {
       if (_Mlog.instance) {
@@ -808,6 +840,7 @@ ${entry.stack}`;
     }
   };
   __publicField(_Mlog, "instance", null);
+  __publicField(_Mlog, "disabled", false);
   var Mlog = _Mlog;
 
   // src/index.js
