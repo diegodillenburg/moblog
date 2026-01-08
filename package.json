@@ -18,6 +18,8 @@
   "scripts": {
     "build": "node build.js",
     "dev": "node build.js --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -35,6 +37,8 @@
     "url": "https://github.com/diegodillenburg/mlog"
   },
   "devDependencies": {
-    "esbuild": "^0.20.0"
+    "esbuild": "^0.20.0",
+    "jsdom": "^24.0.0",
+    "vitest": "^1.2.0"
   }
 }
