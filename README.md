@@ -125,6 +125,80 @@ When disabled, `Mlog.init()` returns a no-op instance so your code won't break.
 - **Escape** key to minimize
 - **Click** the FAB button to expand
 
+## Framework Integration
+
+Initialize mlog **as early as possible** to capture all console output. The best location depends on your stack:
+
+### Rails (with importmaps or esbuild)
+
+```js
+// app/javascript/application.js (top of file)
+import Mlog from 'mlog';
+Mlog.init();
+
+// ... rest of your imports
+```
+
+### Rails (Stimulus)
+
+```js
+// app/javascript/controllers/application.js
+import { Application } from "@hotwired/stimulus";
+import Mlog from 'mlog';
+
+Mlog.init();
+
+const application = Application.start();
+```
+
+### React / Next.js
+
+```jsx
+// src/index.js or pages/_app.js (top of file)
+import Mlog from 'mlog';
+Mlog.init();
+
+// ... rest of imports
+```
+
+### Vue
+
+```js
+// src/main.js (top of file)
+import Mlog from 'mlog';
+Mlog.init();
+
+import { createApp } from 'vue';
+// ...
+```
+
+### Vanilla HTML
+
+```html
+<!-- In <head>, before other scripts -->
+<script src="https://unpkg.com/mlog"></script>
+<script>Mlog.init();</script>
+```
+
+### Conditional Loading (Production only, dev only, etc.)
+
+```js
+// Only in development
+if (process.env.NODE_ENV === 'development') {
+  import('mlog').then(({ default: Mlog }) => Mlog.init());
+}
+
+// Only in production (for field debugging)
+if (process.env.NODE_ENV === 'production') {
+  import('mlog').then(({ default: Mlog }) => Mlog.init());
+}
+
+// Only on mobile devices
+if (/iPhone|iPad|Android/i.test(navigator.userAgent)) {
+  import('mlog').then(({ default: Mlog }) => Mlog.init());
+}
+```
+
 ## Use Cases
 
 - Debug JavaScript issues on mobile devices without DevTools
@@ -135,14 +209,10 @@ When disabled, `Mlog.init()` returns a no-op instance so your code won't break.
 ## Development
 
 ```bash
-# Install dependencies
-npm install
-
-# Build
-npm run build
-
-# Watch mode
-npm run dev
+npm install       # Install dependencies
+npm run build     # Build all bundles
+npm run dev       # Watch mode
+npm test          # Run tests
 ```
 
 ## Comparison
